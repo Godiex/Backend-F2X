@@ -1,6 +1,6 @@
 using Domain.Exceptions.App;
 
-namespace Domain.Exception
+namespace Domain.Exceptions
 {
     [System.Serializable]
     public class UnderAgeException : AppException

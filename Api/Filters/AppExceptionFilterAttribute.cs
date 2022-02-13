@@ -1,5 +1,4 @@
 using System.Net;
-using Domain.Exception;
 using Domain.Exceptions.App;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;

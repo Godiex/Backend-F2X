@@ -1,5 +1,5 @@
 using Domain.Entities;
-using Domain.Exception;
+using Domain.Exceptions;
 using Domain.Ports;
 
 namespace Domain.Services
