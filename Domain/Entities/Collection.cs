@@ -1,7 +1,9 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using Domain.Entities.Base;
 
 namespace Domain.Entities;
 
+[Table("Recaudos")]
 public class Collection : EntityBase<Guid>
 {
     public string Station { get; set; }

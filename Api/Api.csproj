@@ -39,4 +39,8 @@
     <InternalsVisibleTo Include="Api.Tests" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers" />
+  </ItemGroup>
+
 </Project>

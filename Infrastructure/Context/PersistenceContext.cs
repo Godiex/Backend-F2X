@@ -14,6 +14,8 @@ namespace Infrastructure.Context
         {
             _config = config;
         }
+        
+        public DbSet<Collection> Collections { get; set; }
 
         public async Task CommitAsync()
         {
@@ -28,9 +30,7 @@ namespace Infrastructure.Context
             }
 
             modelBuilder.HasDefaultSchema(_config.GetValue<string>("SchemaName"));
-            modelBuilder.Entity<Person>();
-
-
+            
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {
                 var t = entityType.ClrType;

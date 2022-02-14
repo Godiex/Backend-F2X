@@ -16,4 +16,9 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />    
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Person\Commands" />
+    <Folder Include="Person\Queries" />
+  </ItemGroup>
+
 </Project>

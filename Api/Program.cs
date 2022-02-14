@@ -2,6 +2,7 @@ using System.Reflection;
 using Api.Filters;
 using Infrastructure.Context;
 using Infrastructure.Extensions;
+using Infrastructure.Seeder;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Prometheus;
@@ -32,8 +33,6 @@ builder.Services.AddHealthChecks().AddSqlServer(config["ConnectionStrings:databa
 
 builder.Services.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(dispose: true));
 
-builder.Services.AddPersistence(config).AddDomainServices().AddRabbitSupport(config);
-
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new() { Title = "Counting and Collection Api", Version = "v1" });
@@ -56,6 +55,11 @@ app.UseRouting().UseHttpMetrics().UseEndpoints(endpoints =>
     endpoints.MapMetrics();
     endpoints.MapHealthChecks("/health");
 });
+
+using var scope = app.Services.GetService<IServiceScopeFactory>()?.CreateScope();
+var context = scope?.ServiceProvider.GetRequiredService<PersistenceContext>();
+var start = new Initiation(context);
+start.Initialize(config);
 
 app.UseHttpLogging();
 app.UseHttpsRedirection();
