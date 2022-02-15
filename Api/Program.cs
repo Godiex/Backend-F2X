@@ -1,6 +1,7 @@
 using System.Reflection;
 using Api.Filters;
 using Infrastructure.Context;
+using Infrastructure.Extensions;
 using Infrastructure.Seeder;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,7 @@ builder.Services.AddControllers(opts =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(Assembly.Load("Application"), typeof(Program).Assembly);
+builder.Services.AddPersistence(config).AddDomainServices();
 builder.Services.AddAutoMapper(Assembly.Load("Application"));
 
 builder.Services.AddDbContext<PersistenceContext>(opt =>

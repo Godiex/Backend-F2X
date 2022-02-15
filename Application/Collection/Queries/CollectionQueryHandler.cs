@@ -16,7 +16,13 @@ public class CollectionQueryHandler: IRequestHandler<CollectionQuery, List<Colle
     public async Task<List<CollectionDto>> Handle(CollectionQuery request, CancellationToken cancellationToken)
     {
         _ = request ?? throw new ArgumentNullException(nameof(request), "request object needed to handle this task");
-        return (await _dapperSource.QueryAsync<CollectionDto>("SELECT * FROM diego.Recaudos")).ToList();
+        return (await _dapperSource.QueryAsync<CollectionDto>(
+            String.Concat(
+            "SELECT * ",
+            "FROM diego.Recaudos ",
+            "ORDER BY Date DESC ",
+            $"OFFSET {(request.pageNumber - 1) * request.pageSize} ROWS FETCH NEXT {request.pageSize} ROWS ONLY "
+        ))).ToList();
     }
     
     
