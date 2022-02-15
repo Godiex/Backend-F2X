@@ -7,9 +7,9 @@ namespace Infrastructure.Seeder.Entities;
 public static class CollectionInitialize
 {
     private const int NUMBERS_OF_MONTHS = 8;
-    private static HttpClientCollectionFactory httpClientCollection;
+    private static HttpClientCollectionFactory? httpClientCollection;
     private static List<Collection> collections = new List<Collection>();
-    public static async void Initialize(PersistenceContext persistenceContext, IConfiguration config)
+    public static async Task Initialize(PersistenceContext persistenceContext, IConfiguration config)
     { 
         httpClientCollection = new HttpClientCollectionFactory(config);
         var token = await httpClientCollection.LoginInApi();
@@ -25,7 +25,7 @@ public static class CollectionInitialize
         List<Collection> collectionsOfDay;
         while (initialDate < currentDate)
         {
-            var collectionAmount = await httpClientCollection.GetAmountVehicle(token, initialDate);
+            var collectionAmount = await httpClientCollection?.GetAmountVehicle(token, initialDate)!;
             var collectionTabulatedValue = await httpClientCollection.GetCollectionVehicle(token, initialDate);
             if (collectionTabulatedValue is {Count: > 0} && collectionAmount is {Count: > 0})
             {

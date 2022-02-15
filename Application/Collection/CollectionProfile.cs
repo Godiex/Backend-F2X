@@ -1,6 +1,6 @@
 using AutoMapper;
 
-namespace Application.Person
+namespace Application.Collection
 {
 
     public class CollectionProfile : Profile

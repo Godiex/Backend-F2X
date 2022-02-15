@@ -1,7 +1,6 @@
 using System.Reflection;
 using Api.Filters;
 using Infrastructure.Context;
-using Infrastructure.Extensions;
 using Infrastructure.Seeder;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -58,8 +57,11 @@ app.UseRouting().UseHttpMetrics().UseEndpoints(endpoints =>
 
 using var scope = app.Services.GetService<IServiceScopeFactory>()?.CreateScope();
 var context = scope?.ServiceProvider.GetRequiredService<PersistenceContext>();
-var start = new Initiation(context);
-start.Initialize(config);
+if (context != null)
+{
+    var start = new Initiation(context);
+    start.Initialize(config);
+}
 
 app.UseHttpLogging();
 app.UseHttpsRedirection();
