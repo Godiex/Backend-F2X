@@ -30,6 +30,14 @@ builder.Services.AddDbContext<PersistenceContext>(opt =>
     });
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy",
+        corsPolicyBuilder => corsPolicyBuilder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
+
 builder.Services.AddHealthChecks().AddSqlServer(config["ConnectionStrings:database"]);
 
 builder.Services.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(dispose: true));
@@ -49,6 +57,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Counting and Collection Api"));
 }
+
+app.UseCors("CorsPolicy");
 
 app.UseRouting().UseHttpMetrics().UseEndpoints(endpoints =>
 {

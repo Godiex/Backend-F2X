@@ -2,7 +2,7 @@
 using Dapper;
 using MediatR;
 
-namespace Application.Collection.Queries;
+namespace Application.Collection.Queries.SimpleQuery;
 
 public class CollectionQueryHandler: IRequestHandler<CollectionQuery, List<CollectionDto>>
 {

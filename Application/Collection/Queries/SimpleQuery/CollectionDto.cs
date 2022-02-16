@@ -1,4 +1,4 @@
-﻿namespace Application.Collection.Queries;
+﻿namespace Application.Collection.Queries.SimpleQuery;
 
 public class CollectionDto
 {

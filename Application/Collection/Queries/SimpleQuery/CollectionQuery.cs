@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using MediatR;
 
-namespace Application.Collection.Queries;
+namespace Application.Collection.Queries.SimpleQuery;
 
     public record CollectionQuery(
         [Required] int pageNumber,
